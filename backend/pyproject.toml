@@ -7,6 +7,7 @@ authors = ["Svennson17 <kiryl.shvedau@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^4.1.4"
+psycopg2 = "^2.9.5"
 
 [tool.poetry.dev-dependencies]
 
