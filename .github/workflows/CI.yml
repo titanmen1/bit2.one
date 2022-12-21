@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script: |
-# TODO add GitHub Runner
+#           TODO add GitHub Runner
             ls
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/for_github_pulling
@@ -26,7 +26,7 @@ jobs:
             cd deploy
             docker compose stop
             docker compose up -d
-#            docker compose stop
-#            docker compose rm -f
-#            docker compose pull
-#            docker compose up -d
+#           docker compose stop
+#           docker compose rm -f
+#           docker compose pull
+#           docker compose up -d
