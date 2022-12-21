@@ -3,4 +3,4 @@ services:
   nginx:
     image: "nginx:latest"
     ports:
-      - "80:81"
+      - "80:80"
