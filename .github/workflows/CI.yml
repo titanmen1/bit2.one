@@ -19,6 +19,9 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: 22
           script: |
+            ls
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/for_github_pulling
             cd bit2.one
             git pull
             cd deploy
