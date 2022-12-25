@@ -8,7 +8,6 @@ authors = ["Svennson17 <kiryl.shvedau@gmail.com>"]
 python = "^3.9"
 Django = "^4.1.4"
 psycopg2 = "^2.9.5"
-pyshorteners = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 

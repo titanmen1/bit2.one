@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from shortener.models import Shortener
 from shortener.forms import ShortenerForm
 from django.views.generic import CreateView
 from django.views import View
-import pyshorteners
+
 
 
 class CreateShortUrlView(CreateView):
