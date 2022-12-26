@@ -6,7 +6,6 @@ from django.views.generic import CreateView
 from django.views import View
 
 
-
 class CreateShortUrlView(CreateView):
     model = Shortener
     template_name = 'shortener/home.html'
@@ -22,7 +21,11 @@ class CreateShortUrlView(CreateView):
         return render(
             self.request,
             self.template_name,
-            self.get_context_data(form=form, new_url=new_url, full_url=full_url)
+            self.get_context_data(
+                form=form,
+                new_url=new_url,
+                full_url=full_url
+            )
         )
 
     def get_context_data(self, **kwargs):

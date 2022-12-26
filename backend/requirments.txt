@@ -1,0 +1,11 @@
+asgiref==3.5.2; python_version >= "3.8" \
+    --hash=sha256:1d2880b792ae8757289136f1db2b7b99100ce959b2aa57fd69dab783d05afac4 \
+    --hash=sha256:4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424
+django==4.1.4; python_version >= "3.8"
+flake8==6.0.0; python_full_version >= "3.8.1"
+mccabe==0.7.0; python_version >= "3.6" and python_full_version >= "3.8.1"
+psycopg2==2.9.5; python_version >= "3.6"
+pycodestyle==2.10.0; python_version >= "3.6" and python_full_version >= "3.8.1"
+pyflakes==3.0.1; python_version >= "3.6" and python_full_version >= "3.8.1"
+sqlparse==0.4.3; python_version >= "3.8"
+tzdata==2022.7; sys_platform == "win32" and python_version >= "3.8"
