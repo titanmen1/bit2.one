@@ -8,7 +8,6 @@ class Shortener(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     def save(self, *args, **kwargs):
         if not self.short_url:
             self.short_url = create_shortened_url(self)
