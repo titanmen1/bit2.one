@@ -39,4 +39,6 @@ jobs:
           cd backend
           make package-install
       - name: Lint
-        run: make lint
+        run: |
+          cd backend
+          make lint
