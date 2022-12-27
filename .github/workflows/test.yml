@@ -36,6 +36,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          make package-install
+          poetry install
+#          make package-install
       - name: Lint
         run: make lint
