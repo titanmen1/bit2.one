@@ -1,44 +1,25 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from shortener.models import Shortener
-from shortener.forms import ShortenerForm
-from django.views.generic import CreateView
-from django.views import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from shortener.serializers import ShortenerSerializer
 
 
-class CreateShortUrlView(CreateView):
-    model = Shortener
-    template_name = 'shortener/home.html'
-    form_class = ShortenerForm
-
-    def form_valid(self, form):
-        form.save()
-
-        shortened_object = form.instance
-        new_url = self.request.build_absolute_uri('/') + shortened_object.short_url
-        full_url = shortened_object.full_url
-
-        return render(
-            self.request,
-            self.template_name,
-            self.get_context_data(
-                form=form,
-                new_url=new_url,
-                full_url=full_url
-            )
-        )
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['new_url'] = kwargs.get('new_url')
-        context['long_url'] = kwargs.get('full_url')
-        return context
-
-
-class RedirectUrlView(View):
+class CreateShortUrlView(APIView):
     def get(self, request, *args, **kwargs):
+        shorteners = Shortener.objects.filter()
+        serializer = ShortenerSerializer(shorteners, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
-        shortener = Shortener.objects.get(short_url=kwargs['shortened_part'])
-        shortener.save()
-
-        return HttpResponseRedirect(shortener.full_url)
+    def post(self, request, *args, **kwargs):
+        data = {
+            # 'short_url': request.data.get('short_url'),
+            'full_url': request.data.get('full_url'),
+            # 'created_at': request.data.get('created_at'),
+            # 'updated_at': request.data.get('updated_at')
+        }
+        serializer = ShortenerSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
