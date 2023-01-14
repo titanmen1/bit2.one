@@ -7,10 +7,6 @@ from django.shortcuts import redirect
 
 
 class CreateShortUrlView(APIView):
-    # def get(self, request, *args, **kwargs):
-    #     shorteners = Shortener.objects.filter()
-    #     serializer = ShortenerSerializer(shorteners, many=True)
-    #     return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         data = {
