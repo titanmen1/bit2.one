@@ -15,4 +15,3 @@ urlpatterns = [
         name='redirect'
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
