@@ -1,6 +1,36 @@
 version: "3.9"
 services:
+  backend:
+    image: titanmen/bit2.one_backend:latest
+    depends_on:
+      - postgres
+    volumes:
+      - static:/static
+    ports:
+      - "8000:8000"
+
   nginx:
-    image: "nginx:latest"
+    image: titanmen/bit2.one_nginx:latest
+    volumes:
+      - static:/static
     ports:
       - "80:80"
+    depends_on:
+      - backend
+
+  postgres:
+    image: "postgres:latest"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data:delegated
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=backend
+
+volumes:
+  pg_data:
+    driver: local
+  static:
