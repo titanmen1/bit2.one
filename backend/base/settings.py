@@ -144,7 +144,10 @@ STATIC_ROOT = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-SITE_URL = "http://localhost:8000"
+HOST_NAME = os.getenv("HOST_NAME", default="localhost")
+HOST_PORT = os.getenv("HOST_PORT")
+
+SITE_URL = HOST_NAME if not HOST_PORT else HOST_NAME + ':' + HOST_PORT
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
