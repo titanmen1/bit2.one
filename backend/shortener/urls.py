@@ -8,7 +8,7 @@ appname = "shortener"
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="base.html"), name="home"),
-    path("create_shor_url", views.CreateShortUrlView.as_view(), name="create_shor_url"),
+    path("create_short_url", views.CreateShortUrlView.as_view(), name="create_short_url"),
     path(
         'r/<str:shortened_part>',
         views.RedirectUrlView.as_view(),

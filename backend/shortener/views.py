@@ -1,3 +1,4 @@
+from base.settings import HOST_NAME, SITE_URL
 from shortener.models import Shortener
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -19,7 +20,10 @@ class CreateShortUrlView(APIView):
         serializer = ShortenerSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            result = self.request.build_absolute_uri('/') + serializer.instance.short_url
+            # 'http://backend/asdasd'
+            # 'http://89..../r/asdasd'
+            result = f'http://{SITE_URL}/r/' + serializer.instance.short_url
+            # result = self.request.build_absolute_uri('/') + serializer.instance.short_url
             return Response({'result': result}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
