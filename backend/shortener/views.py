@@ -1,4 +1,3 @@
-from base.settings import SITE_URL
 from shortener.models import Shortener
 from rest_framework.views import APIView
 from rest_framework.response import Response
