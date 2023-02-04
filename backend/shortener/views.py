@@ -8,6 +8,8 @@ from django.shortcuts import redirect
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from shortener.utils import create_qr_code
+
 
 class CreateShortUrlView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -20,11 +22,9 @@ class CreateShortUrlView(APIView):
         serializer = ShortenerSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            # 'http://backend/asdasd'
-            # 'http://89..../r/asdasd'
-            result = f'http://{SITE_URL}/r/' + serializer.instance.short_url
-            # result = self.request.build_absolute_uri('/') + serializer.instance.short_url
-            return Response({'result': result}, status=status.HTTP_201_CREATED)
+            result = self.request.build_absolute_uri('/') + serializer.instance.short_url
+            qr_code = create_qr_code(result)
+            return Response({'result': result, 'qrcode': qr_code}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -1,6 +1,10 @@
+import base64
+from io import BytesIO
+
 from django.conf import settings
 from random import choice
 from string import ascii_letters, digits
+import qrcode
 
 SIZE = getattr(settings, "MAXIMUM_URL_CHARS", 7)
 
@@ -21,3 +25,11 @@ def create_shortened_url(model_instance):
         return create_shortened_url(model_instance)
 
     return random_code
+
+
+def create_qr_code(result):
+    result = qrcode.make(result)
+    stream = BytesIO()
+    result.save(stream)
+    img_str = base64.b64encode(stream.getvalue()).decode("utf-8")
+    return img_str
